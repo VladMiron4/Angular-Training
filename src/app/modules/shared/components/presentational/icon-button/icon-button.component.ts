@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-icon-button',
   templateUrl: './icon-button.component.html',
   styleUrls: ['./icon-button.component.scss'],
-  standalone:true,
+  standalone: true,
 })
 export class IconButtonComponent {
-
+  @Input() imageUrl!:String;
 }

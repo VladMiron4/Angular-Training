@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  productsMockList } from '../../mocks/products.mock';
+import { productsMockList } from '../../mocks/products.mock';
 import { Product } from '../../../modules/shared/types/product';
 
 @Component({
@@ -7,8 +7,6 @@ import { Product } from '../../../modules/shared/types/product';
   templateUrl: './products-lists.component.html',
   styleUrls: ['./products-lists.component.scss'],
 })
-export class ProductsListsComponent  {
-  productList: Product[]=productsMockList;
-  constructor(){
-  }
+export class ProductsListsComponent {
+  productList: Product[] = productsMockList;
 }
