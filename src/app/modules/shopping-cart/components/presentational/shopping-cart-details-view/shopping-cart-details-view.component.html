@@ -1,0 +1,29 @@
+<div class="shopping-cart-menu">
+    <h2>Products</h2>
+    <button>editbutton</button>
+    <button>deletebutton</button>
+</div>
+
+
+<div class="shopping-cart-titles">
+    <h1>Category</h1>
+    <h1>Name</h1>
+    <h1>Price</h1>
+
+</div>
+
+
+<div class="shopping-cart-details" *ngFor="let product of productList">
+    <div class="detail">
+        <p>{{product.category}}</p>
+    </div>
+    <div class="detail">
+        <p>{{product.name}}</p>
+    </div>
+    <div class="detail">
+        <p>{{product.price}}</p>
+    </div>
+    <div class="detail">
+        <app-icon-button></app-icon-button>
+    </div>
+</div>
