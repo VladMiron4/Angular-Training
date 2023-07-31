@@ -7,7 +7,6 @@ import { ProductsListsComponent } from './components/containers/products-lists/p
 import { ProductsListViewComponent } from './components/presentational/products-list-view/products-list-view.component';
 import { ProductsDetailsViewComponent } from './components/presentational/products-details-view/products-details-view.component';
 import { ProductsDetailsComponent } from './components/containers/products-details/products-details.component';
-import { IconButtonComponent } from './modules/shared/components/icon-button/icon-button.component';
 import { ShoppingCartModule } from './modules/shopping-cart/shopping-cart.module';
 
 
