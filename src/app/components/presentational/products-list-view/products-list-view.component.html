@@ -1,0 +1,12 @@
+<button>Shopping Cart</button>
+<div class="view-container">
+  <div *ngFor="let product of productList" class="product-container">
+    <a routerLink="../app-products-details/{{ product.id }}">
+      <img [src]="product.image" />
+      <div class="product">
+        <p>{{ product.name }}</p>
+        <p>{{ product.price }}</p>
+      </div>
+    </a>
+  </div>
+</div>

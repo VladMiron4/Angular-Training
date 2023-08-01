@@ -1,0 +1,18 @@
+.shopping-cart-titles {
+  display: grid;
+  grid-template-columns: 15vh 15vh 15vh 15vh;
+}
+.shopping-cart-details {
+  display: grid;
+  grid-template-columns: 15vh 15vh 15vh 7vh 7vh;
+}
+
+.detail {
+  border: 2px;
+  border-style: dashed;
+  border-color: black;
+}
+.shopping-cart-menu {
+  display: grid;
+  grid-template-columns: 65vh 25vh 25vh;
+}
