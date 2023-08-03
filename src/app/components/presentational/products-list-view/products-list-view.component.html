@@ -1,7 +1,9 @@
-<button>Shopping Cart</button>
+
+<button (click)="navigateToCart.emit()">Shopping Cart</button>
+<button (click)="navigateToCreate.emit">Add</button>
 <div class="view-container">
   <div *ngFor="let product of productList" class="product-container">
-    <a routerLink="../app-products-details/{{ product.id }}">
+    <a (click)="navigateToDetails.emit(product.id)">
       <img [src]="product.image" />
       <div class="product">
         <p>{{ product.name }}</p>

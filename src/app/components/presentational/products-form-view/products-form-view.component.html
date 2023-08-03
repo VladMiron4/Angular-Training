@@ -1,0 +1,13 @@
+<div *ngIf="product">
+  <form class="form-wrapper" [formGroup]="productForm">
+    <input  formControlName="name"/>
+    <input  formControlName="category"/>
+    <input  formControlName="description"/>
+    <input  formControlName="price"/>
+    <input  formControlName="image"/>
+    <div class="form-button-wrapper">
+      <button class="save-button" type="button" [disabled]="!productForm.valid"  (click)="submitProduct(productForm)">Save</button>
+      <button class="cancel-button" type="button" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </form>
+</div>
