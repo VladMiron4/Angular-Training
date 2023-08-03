@@ -13,6 +13,8 @@ export class ProductsFormViewComponent {
   @Output() submit: EventEmitter<FormGroup> = new EventEmitter();
   submitProduct(productForm: FormGroup) {
     this.submit.emit(productForm);
+    console.log(this.product);
+    console.log(this.productForm);
   }
   cancelEdit() {
     this.productForm.reset();

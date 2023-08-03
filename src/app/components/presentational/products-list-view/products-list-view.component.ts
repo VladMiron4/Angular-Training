@@ -9,6 +9,6 @@ import { ProductDto } from 'src/app/modules/shared/types/product.dto';
 export class ProductsListViewComponent {
   @Input() productList!: ProductDto[];
   @Output() navigateToCart = new EventEmitter<void>();
-  @Output() navigateToCreate = new EventEmitter();
+  @Output() navigateToCreate = new EventEmitter<void>();
   @Output() navigateToDetails = new EventEmitter<string>();
 }
