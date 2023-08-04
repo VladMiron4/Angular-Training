@@ -26,7 +26,7 @@ export class ShoppingCartService {
 
   public removeFromShoppingCart(
     shoppingCart: OrderProduct[],
-    productId: String
+    productId: string
   ): OrderProduct[] {
     return shoppingCart.filter((product) => product.id !== productId.trim());
   }
