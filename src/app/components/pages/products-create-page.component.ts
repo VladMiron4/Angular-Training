@@ -11,6 +11,4 @@ import { Component, Output } from "@angular/core";
     styleUrls: [],
   })
 export class ProductsCreatePageComponent {
-
-
 }

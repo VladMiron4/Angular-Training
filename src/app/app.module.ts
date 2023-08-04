@@ -29,12 +29,13 @@ import { ProductsEditPageComponent } from './components/pages/products-edit-page
     ProductFormComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     ShoppingCartModule,
     IconButtonComponent,
     HttpClientModule,
-    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

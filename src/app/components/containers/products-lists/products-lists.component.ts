@@ -18,7 +18,6 @@ export class ProductsListsComponent implements OnInit{
   }
   onNavigateToCreate(){
     this.appNavigationService.navigateToProductCreate();
-    console.log("I gots here")
   }
   onNavigateToDetails(id:string){
     this.appNavigationService.navigateToProductDetails(id);

@@ -26,7 +26,6 @@ export class AppNavigationService {
     ]);
   }
   navigateToProductCreate(){
-    console.log(AppRoutes.PRODUCTS_FEATURE,AppRoutes.CREATE_SUB_FEATURE);
     this.router.navigate([
         AppRoutes.PRODUCTS_FEATURE,
         AppRoutes.CREATE_SUB_FEATURE,

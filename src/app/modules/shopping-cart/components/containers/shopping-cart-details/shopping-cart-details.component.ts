@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable, of } from 'rxjs';
 import { productsMockList } from 'src/app/components/mocks/products.mock';
 import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
@@ -8,6 +9,9 @@ import { OrderProduct } from 'src/app/modules/shared/types/product.order';
 import { OrderByCustomerDto } from 'src/app/modules/shared/types/product.order.with.customer';
 import { environment } from 'src/environments/environment';
 
+@UntilDestroy({
+  checkProperties:true,
+})
 @Component({
   selector: 'app-shopping-cart-details',
   templateUrl: './shopping-cart-details.component.html',
