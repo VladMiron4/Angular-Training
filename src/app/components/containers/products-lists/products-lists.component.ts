@@ -1,12 +1,30 @@
-import { Component } from '@angular/core';
-import { productsMockList } from '../../mocks/products.mock';
-import { Product } from '../../../modules/shared/types/product';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ProductDto } from 'src/app/modules/shared/types/product.dto';
+import { environment } from 'src/environments/environment';
+import { AppNavigationService } from 'src/app/modules/shared/services/app-navigation.service';
 
 @Component({
   selector: 'app-products-lists',
   templateUrl: './products-lists.component.html',
   styleUrls: ['./products-lists.component.scss'],
 })
-export class ProductsListsComponent {
-  productList: Product[] = productsMockList;
+export class ProductsListsComponent implements OnInit{
+  productList:ProductDto[]=[];
+  constructor(private http:HttpClient, private appNavigationService: AppNavigationService){
+  }
+  onNavigateToCart(){
+    this.appNavigationService.navigateToCart();
+  }
+  onNavigateToCreate(){
+    this.appNavigationService.navigateToProductCreate();
+    console.log("I gots here")
+  }
+  onNavigateToDetails(id:string){
+    this.appNavigationService.navigateToProductDetails(id);
+  }
+  ngOnInit(): void {
+    this.http.get(`${environment.apiUrl}/products`).subscribe(response=>this.productList=response as ProductDto[]);
+  }
+  
 }

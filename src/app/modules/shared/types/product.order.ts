@@ -1,9 +1,9 @@
-export interface Product {
+export interface OrderProduct {
   name: string;
   category: string;
   image: string;
   price: number;
   description: string;
-  id: String;
+  id: string;
   quantity: number;
 }

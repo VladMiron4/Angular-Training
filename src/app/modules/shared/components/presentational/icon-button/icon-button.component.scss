@@ -1,12 +1,13 @@
-img {
-  width: 5vh;
-  height: 5vh;
-  cursor: pointer;
-}
+
 button {
   border: none;
   background: none;
   :hover {
     opacity: 75%;
   }
+}
+img {
+  height:5vh;
+  width:5vh;
+  cursor: pointer;
 }

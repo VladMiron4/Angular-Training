@@ -3,20 +3,44 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShoppingCartDetailsComponent } from './modules/shopping-cart/components/containers/shopping-cart-details/shopping-cart-details.component';
 import { ProductsDetailsComponent } from './components/containers/products-details/products-details.component';
 import { ProductsListsComponent } from './components/containers/products-lists/products-lists.component';
+import { ProductsCreatePageComponent } from './components/pages/products-create-page.component';
+import { AppRoutes } from './modules/shared/types/app.routing.types';
+import { ProductsEditPageComponent } from './components/pages/products-edit-page.component';
+
+// products => ProductsListPage
+// products/create => ProductsCreatePageComponent
+// products/:id => ProductDetailsPage
+// cart
+
+
+// (click) => NavigationService
+// navigateToProductsList => this.router.navigateByUrl('/products')
+// navigateToProductsCreate => tihs.router.navigate(['products', 'create'])
 
 const routes: Routes = [
   {
-    path: 'app-shopping-cart-details',
+    path:`${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.CREATE_SUB_FEATURE}`,
+    component: ProductsCreatePageComponent, // create page
+  },
+  {
+    path: `${AppRoutes.PRODUCTS_FEATURE}`,
+    component:ProductsListsComponent, 
+  },
+  {
+    path: `${AppRoutes.CART_FEATURE}`,
     component: ShoppingCartDetailsComponent,
   },
   {
-    path: 'app-products-details/:id',
+    path: `${AppRoutes.PRODUCTS_FEATURE}/:id`,
     component: ProductsDetailsComponent,
   },
   {
-    path: 'app-products-lists',
-    component: ProductsListsComponent,
+    path:`${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.EDIT_SUB_FEATURE}/:id`,
+    component:ProductsEditPageComponent,
   },
+  {
+    path:'', redirectTo: `${AppRoutes.PRODUCTS_FEATURE}`, pathMatch:'full'
+  }
 ];
 
 @NgModule({
