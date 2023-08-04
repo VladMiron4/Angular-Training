@@ -11,10 +11,4 @@ export class ProductsFormViewComponent {
   @Input() product!: Product;
   @Input() productForm!: FormGroup;
   @Output() submit: EventEmitter<FormGroup> = new EventEmitter();
-  submitProduct(productForm: FormGroup) {
-    this.submit.emit(productForm);
-  }
-  cancelEdit() {
-    this.productForm.reset();
-  }
 }

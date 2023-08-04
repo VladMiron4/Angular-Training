@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
-import { Product } from 'src/app/modules/shared/types/product.dto';
 import { OrderProduct } from 'src/app/modules/shared/types/product.order';
 
 @Component({

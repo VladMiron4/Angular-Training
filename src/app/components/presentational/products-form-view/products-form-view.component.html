@@ -9,11 +9,11 @@
       class="save-button"
       type="button"
       [disabled]="!productForm.valid"
-      (click)="submitProduct(productForm)"
+      (click)="this.submit.emit(productForm);"
     >
       Save
     </button>
-    <button class="cancel-button" type="button" (click)="cancelEdit()">
+    <button class="cancel-button" type="button" (click)="this.productForm.reset();">
       Cancel
     </button>
   </div>

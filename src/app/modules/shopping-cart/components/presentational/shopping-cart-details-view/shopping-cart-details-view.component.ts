@@ -17,5 +17,4 @@ export class ShoppingCartDetailsViewComponent {
   @Output() removeProductEvent = new EventEmitter<string>();
   @Output() checkoutOrderEvent = new EventEmitter<OrderProduct[]>();
   @Output() navigateToProductDetailsEvent = new EventEmitter<string>();
- 
 }

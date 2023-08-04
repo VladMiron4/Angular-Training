@@ -17,6 +17,13 @@ export class ProductsListsComponent implements OnInit {
     private http: HttpClient,
     private appNavigationService: AppNavigationService
   ) {}
+  ngOnInit(): void {
+    this.productList=[];
+    this.http
+      .get(`${environment.apiUrl}/products`)
+      .pipe(untilDestroyed(this))
+      .subscribe((response) => (this.productList = response as Product[]));
+  }
   onNavigateToCart() {
     this.appNavigationService.navigateToCart();
   }
@@ -26,11 +33,5 @@ export class ProductsListsComponent implements OnInit {
   onNavigateToDetails(id: string) {
     this.appNavigationService.navigateToProductDetails(id);
   }
-  ngOnInit(): void {
-    this.productList=[];
-    this.http
-      .get(`${environment.apiUrl}/products`)
-      .pipe(untilDestroyed(this))
-      .subscribe((response) => (this.productList = response as Product[]));
-  }
+  
 }

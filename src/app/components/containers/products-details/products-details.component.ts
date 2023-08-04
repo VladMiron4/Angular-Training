@@ -27,6 +27,13 @@ export class ProductsDetailsComponent implements OnInit {
   ) {
     
   }
+  ngOnInit(): void {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    this.productService
+      .getProduct(id)
+      .pipe(untilDestroyed(this))
+      .subscribe((product: Product) => (this.product = product as OrderProduct));
+  }
 
   onNavigateToProductList() {
     this.appNavigationService.navigateToProductsList();
@@ -35,13 +42,7 @@ export class ProductsDetailsComponent implements OnInit {
   onNavigateToProductEdit(id: string) {
     this.appNavigationService.navigateToProductEdit(id);
   }
-  ngOnInit(): void {
-    const id = String(this.route.snapshot.paramMap.get('id'));
-    this.productService
-      .getProduct(id)
-      .pipe(untilDestroyed(this))
-      .subscribe((product: Product) => (this.product = product as OrderProduct));
-  }
+  
 
   catchAddToShoppingCartEvent(product: OrderProduct) {
     this.shoppingCartService.addToShoppingCart(product);
