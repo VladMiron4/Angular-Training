@@ -3,7 +3,7 @@ import { OrderProduct } from '../../../modules/shared/types/product.order';
 import { ActivatedRoute } from '@angular/router';
 import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
 import { HttpClient } from '@angular/common/http';
-import { ProductDto } from 'src/app/modules/shared/types/product.dto';
+import { Product } from 'src/app/modules/shared/types/product.dto';
 import { environment } from 'src/environments/environment';
 import { AppNavigationService } from 'src/app/modules/shared/services/app-navigation.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -40,7 +40,7 @@ export class ProductsDetailsComponent implements OnInit {
     this.productService
       .getProduct(id)
       .pipe(untilDestroyed(this))
-      .subscribe((product: ProductDto) => (this.product = product as OrderProduct));
+      .subscribe((product: Product) => (this.product = product as OrderProduct));
   }
 
   catchAddToShoppingCartEvent(product: OrderProduct) {

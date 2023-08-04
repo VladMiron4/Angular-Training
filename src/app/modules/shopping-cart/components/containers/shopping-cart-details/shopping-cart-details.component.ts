@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
 import { OrderProductWithId } from 'src/app/modules/shared/types/order.product';
 import { OrderProduct } from 'src/app/modules/shared/types/product.order';
-import { OrderByCustomerDto } from 'src/app/modules/shared/types/product.order.with.customer';
+import { OrderByCustomer } from 'src/app/modules/shared/types/product.order.with.customer';
 import { environment } from 'src/environments/environment';
 
 @UntilDestroy({})
@@ -37,15 +37,15 @@ export class ShoppingCartDetailsComponent {
   }
 
   catchCheckoutOrder(productList: OrderProduct[]) {
-    let dummyCustomer = 'bacb89d7-9070-426f-a662-facb538c8da9';
-    let orderList: OrderProductWithId[] = [];
+    const dummyCustomer = 'bacb89d7-9070-426f-a662-facb538c8da9';
+    const orderList: OrderProductWithId[] = [];
     productList.forEach((product) => {
       orderList.push({
         productId: product.id,
         quantity: product.quantity,
       });
     });
-    let order: OrderByCustomerDto = {
+    const order: OrderByCustomer = {
       products: orderList,
       customerId: dummyCustomer,
     };

@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ProductDto } from 'src/app/modules/shared/types/product.dto';
+import { Product } from 'src/app/modules/shared/types/product.dto';
 import { ProductService } from 'src/app/services/products.service';
 
 @UntilDestroy()
@@ -15,7 +15,7 @@ import { ProductService } from 'src/app/services/products.service';
   styleUrls: [],
 })
 export class ProductsEditPageComponent implements OnInit {
-  product!: ProductDto;
+  product!: Product;
 
   constructor(
     private productService: ProductService,

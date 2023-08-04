@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ProductDto } from 'src/app/modules/shared/types/product.dto';
+import { Product } from 'src/app/modules/shared/types/product.dto';
 
 @Component({
   selector: 'app-products-form-view',
@@ -8,7 +8,7 @@ import { ProductDto } from 'src/app/modules/shared/types/product.dto';
   styleUrls: ['./products-form-view.component.scss'],
 })
 export class ProductsFormViewComponent {
-  @Input() product!: ProductDto;
+  @Input() product!: Product;
   @Input() productForm!: FormGroup;
   @Output() submit: EventEmitter<FormGroup> = new EventEmitter();
   submitProduct(productForm: FormGroup) {

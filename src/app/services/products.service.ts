@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CreateProduct } from '../modules/shared/types/create.product.dto';
+import { CreateProduct } from '../modules/shared/types/create.product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { ProductDto } from '../modules/shared/types/product.dto';
+import { Product } from '../modules/shared/types/product.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +17,14 @@ export class ProductService {
       productDto
     ) ;
   }
-  public put(productDto: ProductDto): Observable<CreateProduct> {
-    return this.http.put <ProductDto>(
+  public put(productDto: Product): Observable<CreateProduct> {
+    return this.http.put <Product>(
       `${environment.apiUrl}/products/${productDto.id}`,
       productDto
     );
   }
-  getProduct(id: String): Observable<ProductDto> {
-    return this.http.get <ProductDto> (
+  getProduct(id: String): Observable<Product> {
+    return this.http.get <Product> (
       `${environment.apiUrl}/products/${id}`
     ) 
   }

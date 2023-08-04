@@ -7,8 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CreateProduct } from 'src/app/modules/shared/types/create.product.dto';
-import { ProductDto } from 'src/app/modules/shared/types/product.dto';
+import { Product } from 'src/app/modules/shared/types/product.dto';
 import { ProductService } from 'src/app/services/products.service';
 @UntilDestroy()
 @Component({
@@ -17,10 +16,10 @@ import { ProductService } from 'src/app/services/products.service';
 })
 export class ProductFormComponent implements OnInit, OnChanges {
   @Input() behaviour!: string;
-  @Input() prevProduct?: ProductDto;
+  @Input() prevProduct?: Product;
 
   productForm!: FormGroup;
-  product!: ProductDto;
+  product!: Product;
   constructor(private productService: ProductService) {
     
   }
@@ -92,7 +91,7 @@ export class ProductFormComponent implements OnInit, OnChanges {
         );
       alert('Product created successfully');
     } else if (this.behaviour === 'edit') {
-      let editProductDto: ProductDto = {
+      let editProductDto: Product = {
         id: this.product.id,
         price: Number(this.productForm.value.price),
         name: productForm.value.name,

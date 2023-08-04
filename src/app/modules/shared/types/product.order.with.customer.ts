@@ -1,5 +1,5 @@
 import { OrderProductWithId } from './order.product';
-export interface OrderByCustomerDto {
+export interface OrderByCustomer {
   products: OrderProductWithId[];
   customerId: string;
 }

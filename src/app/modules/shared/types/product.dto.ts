@@ -1,4 +1,4 @@
-export interface ProductDto {
+export interface Product {
   name: string;
   category: string;
   image: string;
