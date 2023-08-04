@@ -12,19 +12,18 @@ import { ProductsEditPageComponent } from './components/pages/products-edit-page
 // products/:id => ProductDetailsPage
 // cart
 
-
 // (click) => NavigationService
 // navigateToProductsList => this.router.navigateByUrl('/products')
 // navigateToProductsCreate => tihs.router.navigate(['products', 'create'])
 
 const routes: Routes = [
   {
-    path:`${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.CREATE_SUB_FEATURE}`,
+    path: `${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.CREATE_SUB_FEATURE}`,
     component: ProductsCreatePageComponent, // create page
   },
   {
     path: `${AppRoutes.PRODUCTS_FEATURE}`,
-    component:ProductsListsComponent, 
+    component: ProductsListsComponent,
   },
   {
     path: `${AppRoutes.CART_FEATURE}`,
@@ -35,12 +34,14 @@ const routes: Routes = [
     component: ProductsDetailsComponent,
   },
   {
-    path:`${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.EDIT_SUB_FEATURE}/:id`,
-    component:ProductsEditPageComponent,
+    path: `${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.EDIT_SUB_FEATURE}/:id`,
+    component: ProductsEditPageComponent,
   },
   {
-    path:'', redirectTo: `${AppRoutes.PRODUCTS_FEATURE}`, pathMatch:'full'
-  }
+    path: '',
+    redirectTo: `${AppRoutes.PRODUCTS_FEATURE}`,
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

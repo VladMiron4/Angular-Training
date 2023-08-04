@@ -12,42 +12,54 @@ import { AppNavigationService } from 'src/app/modules/shared/services/app-naviga
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProductService } from 'src/app/services/products.service';
 
-@UntilDestroy({
-})
+@UntilDestroy({})
 @Component({
   selector: 'app-products-details',
   templateUrl: './products-details.component.html',
   styleUrls: ['./products-details.component.scss'],
 })
 export class ProductsDetailsComponent implements OnInit {
-  private shoppingCartService : ShoppingCartService;
-   product:ProductDto={
-    category:"",
-    name:"",
-    price:0,
-    image:"",
-    id:"",
-    description:""
+  private shoppingCartService: ShoppingCartService;
+  product: ProductDto = {
+    category: '',
+    name: '',
+    price: 0,
+    image: '',
+    id: '',
+    description: '',
   };
-   
-  constructor(private productService:ProductService,private route: ActivatedRoute,shoppingCartService:ShoppingCartService,private http:HttpClient,private appNavigationService:AppNavigationService) {
-    this.shoppingCartService=shoppingCartService;
+
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    shoppingCartService: ShoppingCartService,
+    private http: HttpClient,
+    private appNavigationService: AppNavigationService
+  ) {
+    this.shoppingCartService = shoppingCartService;
   }
-  onNavigateToProductList(){
+  onNavigateToProductList() {
     this.appNavigationService.navigateToProductsList();
   }
-  onNavigateToProductEdit(id:string){
+  onNavigateToProductEdit(id: string) {
     this.appNavigationService.navigateToProductEdit(id);
   }
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.productService.getProduct(id).pipe(untilDestroyed((this))).subscribe((product : ProductDto) => (this.product = product));
+    this.productService
+      .getProduct(id)
+      .pipe(untilDestroyed(this))
+      .subscribe((product: ProductDto) => (this.product = product));
   }
 
-  catchAddToShoppingCartEvent(product:OrderProduct){
+  catchAddToShoppingCartEvent(product: OrderProduct) {
     this.shoppingCartService.addToShoppingCart(product);
   }
-  catchDeleteProductEvent(id:String){
-     this.http.delete(`${environment.apiUrl}/products/${id}`).subscribe(response=>this.appNavigationService.navigateToProductsList());
+  catchDeleteProductEvent(id: String) {
+    this.http
+      .delete(`${environment.apiUrl}/products/${id}`)
+      .subscribe((response) =>
+        this.appNavigationService.navigateToProductsList()
+      );
   }
 }

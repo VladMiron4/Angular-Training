@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CreateProductDto } from 'src/app/modules/shared/types/create.product.dto';
 import { ProductDto } from 'src/app/modules/shared/types/product.dto';
 import { ProductService } from 'src/app/services/products.service';
 
@@ -38,10 +39,9 @@ export class ProductFormComponent implements OnInit, OnChanges{
   ngOnInit(): void {
     if (this.behaviour==="edit")
     {
-      
+      this.product=this.prevProduct!;
     }
-   
-    this.product=this.prevProduct!;
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,27 +55,39 @@ export class ProductFormComponent implements OnInit, OnChanges{
         price:String(this.prevProduct?.price),
       })
     }
+    console.log(this.productForm.value);
   }
 
   catchProduct(productForm: FormGroup): void {
-    if (this.behaviour == 'create') {
-      this.productForm.value.price = this.productForm.value.price;
+    if (this.behaviour === 'create') {
+      let createProductDto:CreateProductDto={
+        price:Number(this.productForm.value.price),
+        name:productForm.value.name,
+        description:productForm.value.description,
+        category:productForm.value.category,
+        image:productForm.value.image,
+      }
       this.productService
-        .create(productForm.value)
+        .create(createProductDto)
         .subscribe((createdProduct) =>this.product={
           id:this.product.id,
           ...createdProduct
         });
-    } else if (this.behaviour == 'edit') {
+        alert("Product created successfully");
+    } else if (this.behaviour === 'edit') {
       let editProductDto: ProductDto = {
         id: this.product.id,
-        ...productForm.value,
+        price:Number(this.productForm.value.price),
+        name:productForm.value.name,
+        description:productForm.value.description,
+        category:productForm.value.category,
+        image:productForm.value.image,
       };
-      this.productService.put(editProductDto);
+      this.productService.put(editProductDto).subscribe(response=>console.log(response));
       alert('Product edited successfully');
+      console.log(editProductDto);
     } else {
       throw Error('form behaviour not found');
     }
   }
-  
 }

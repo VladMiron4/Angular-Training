@@ -10,7 +10,7 @@ import { OrderByCustomerDto } from 'src/app/modules/shared/types/product.order.w
 import { environment } from 'src/environments/environment';
 
 @UntilDestroy({
-  checkProperties:true,
+  checkProperties: true,
 })
 @Component({
   selector: 'app-shopping-cart-details',
@@ -38,8 +38,8 @@ export class ShoppingCartDetailsComponent {
     );
   }
   catchCheckoutOrder(productList: OrderProduct[]) {
-    let dummyCustomer = "bacb89d7-9070-426f-a662-facb538c8da9";
-    let orderList: OrderProductWithId[]=[];
+    let dummyCustomer = 'bacb89d7-9070-426f-a662-facb538c8da9';
+    let orderList: OrderProductWithId[] = [];
     productList.forEach((product) => {
       orderList.push({
         productId: product.id,

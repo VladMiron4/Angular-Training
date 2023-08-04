@@ -29,4 +29,3 @@ export class ProductService {
     ) as Observable<ProductDto>;
   }
 }
-

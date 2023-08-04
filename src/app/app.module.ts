@@ -35,7 +35,6 @@ import { ProductsEditPageComponent } from './components/pages/products-edit-page
     ShoppingCartModule,
     IconButtonComponent,
     HttpClientModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent],

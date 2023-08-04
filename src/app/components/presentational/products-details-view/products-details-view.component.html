@@ -1,4 +1,3 @@
-
 <div *ngIf="product">
   <div class="details-wrapper">
     <div class="details">
@@ -12,9 +11,13 @@
         <img [src]="product.image" />
       </div>
       <div class="button-wrapper">
-        <button class="edit-button" (click)="emitAddToShoppingCart(product)">Add</button>
-        <button class="delete-button" (click)="emitDeleteProduct(product.id)">Delete</button>
-        <button (click)="navigateToProductList.emit()"> Go Back</button>
+        <button class="edit-button" (click)="emitAddToShoppingCart(product)">
+          Add
+        </button>
+        <button class="delete-button" (click)="emitDeleteProduct(product.id)">
+          Delete
+        </button>
+        <button (click)="navigateToProductList.emit()">Go Back</button>
         <button (click)="navigateToProductEdit.emit(product.id)">Edit</button>
       </div>
     </div>

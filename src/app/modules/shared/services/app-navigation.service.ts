@@ -25,10 +25,10 @@ export class AppNavigationService {
       id,
     ]);
   }
-  navigateToProductCreate(){
+  navigateToProductCreate() {
     this.router.navigate([
-        AppRoutes.PRODUCTS_FEATURE,
-        AppRoutes.CREATE_SUB_FEATURE,
-    ])
+      AppRoutes.PRODUCTS_FEATURE,
+      AppRoutes.CREATE_SUB_FEATURE,
+    ]);
   }
 }

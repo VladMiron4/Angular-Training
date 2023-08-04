@@ -12,8 +12,8 @@ import { ShoppingCartService } from '../shared/services/shopping.cart.service';
     ShoppingCartDetailsComponent,
     ShoppingCartDetailsViewComponent,
   ],
-  imports: [CommonModule, BrowserModule, IconButtonComponent,AppRoutingModule],
+  imports: [CommonModule, BrowserModule, IconButtonComponent, AppRoutingModule],
   exports: [],
-  providers: [ShoppingCartService]
+  providers: [ShoppingCartService],
 })
 export class ShoppingCartModule {}
