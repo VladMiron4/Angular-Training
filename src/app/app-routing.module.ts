@@ -10,7 +10,7 @@ import { ProductsEditPageComponent } from './components/pages/products-edit-page
 const routes: Routes = [
   {
     path: `${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.CREATE_SUB_FEATURE}`,
-    component: ProductsCreatePageComponent, // create page
+    component: ProductsCreatePageComponent,
   },
   {
     path: `${AppRoutes.PRODUCTS_FEATURE}`,
