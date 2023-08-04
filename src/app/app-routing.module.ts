@@ -7,15 +7,6 @@ import { ProductsCreatePageComponent } from './components/pages/products-create-
 import { AppRoutes } from './modules/shared/types/app.routing.types';
 import { ProductsEditPageComponent } from './components/pages/products-edit-page.component';
 
-// products => ProductsListPage
-// products/create => ProductsCreatePageComponent
-// products/:id => ProductDetailsPage
-// cart
-
-// (click) => NavigationService
-// navigateToProductsList => this.router.navigateByUrl('/products')
-// navigateToProductsCreate => tihs.router.navigate(['products', 'create'])
-
 const routes: Routes = [
   {
     path: `${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.CREATE_SUB_FEATURE}`,

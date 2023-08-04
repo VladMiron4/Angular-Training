@@ -1,13 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProductDto } from 'src/app/modules/shared/types/product.dto';
 import { ProductService } from 'src/app/services/products.service';
 
-@UntilDestroy({
-  checkProperties: true,
-})
+@UntilDestroy()
 @Component({
   selector: 'app-products-edit-page',
   template: `<h1>Edit Product</h1>
@@ -26,8 +24,11 @@ export class ProductsEditPageComponent implements OnInit {
 
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.productService.getProduct(id).subscribe((product) => {
-      this.product = product;
-    });
+    this.productService
+      .getProduct(id)
+      .pipe(untilDestroyed(this))
+      .subscribe((product) => {
+        this.product = product;
+      });
   }
 }

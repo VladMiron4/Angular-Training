@@ -3,14 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { ProductDto } from 'src/app/modules/shared/types/product.dto';
 import { environment } from 'src/environments/environment';
 import { AppNavigationService } from 'src/app/modules/shared/services/app-navigation.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-products-lists',
   templateUrl: './products-lists.component.html',
   styleUrls: ['./products-lists.component.scss'],
 })
 export class ProductsListsComponent implements OnInit {
-  productList: ProductDto[] = [];
+  productList!: ProductDto[];
   constructor(
     private http: HttpClient,
     private appNavigationService: AppNavigationService
@@ -25,8 +27,10 @@ export class ProductsListsComponent implements OnInit {
     this.appNavigationService.navigateToProductDetails(id);
   }
   ngOnInit(): void {
+    this.productList=[];
     this.http
       .get(`${environment.apiUrl}/products`)
+      .pipe(untilDestroyed(this))
       .subscribe((response) => (this.productList = response as ProductDto[]));
   }
 }

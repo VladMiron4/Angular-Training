@@ -1,51 +1,55 @@
 import {
   Component,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CreateProductDto } from 'src/app/modules/shared/types/create.product.dto';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { CreateProduct } from 'src/app/modules/shared/types/create.product.dto';
 import { ProductDto } from 'src/app/modules/shared/types/product.dto';
 import { ProductService } from 'src/app/services/products.service';
-
+@UntilDestroy()
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
 })
 export class ProductFormComponent implements OnInit, OnChanges {
   @Input() behaviour!: string;
-  @Input() prevProduct?: ProductDto; // undefined on create mode
-  @Output() buttonAction = new EventEmitter<{
-    type: 'edit' | 'create';
-    payload: ProductDto;
-  }>(); // edit, create, close
+  @Input() prevProduct?: ProductDto;
 
-  product: ProductDto = {
-    category: '',
-    name: '',
-    price: 0,
-    image: '',
-    id: '',
-    description: '',
-  };
-
+  productForm!: FormGroup;
+  product!: ProductDto;
   constructor(private productService: ProductService) {}
 
-  productForm = new FormGroup({
-    name: new FormControl(''),
-    category: new FormControl(''),
-    price: new FormControl(''),
-    image: new FormControl(''),
-    description: new FormControl(''),
-  });
-
   ngOnInit(): void {
+    this.productForm = new FormGroup({
+      name: new FormControl(''),
+      category: new FormControl(''),
+      price: new FormControl(''),
+      image: new FormControl(''),
+      description: new FormControl(''),
+    });
+    this.product = {
+      category: '',
+      name: '',
+      price: 0,
+      image: '',
+      id: '',
+      description: '',
+    };
     if (this.behaviour === 'edit') {
       this.product = this.prevProduct!;
+    } else if (this.behaviour === 'create') {
+      this.product = {
+        category: '',
+        name: '',
+        price: 0,
+        image: '',
+        id: '',
+        description: '',
+      };
     }
   }
 
@@ -68,20 +72,23 @@ export class ProductFormComponent implements OnInit, OnChanges {
 
   catchProduct(productForm: FormGroup): void {
     if (this.behaviour === 'create') {
-      let createProductDto: CreateProductDto = {
+      let createProductDto: CreateProduct = {
         price: Number(this.productForm.value.price),
         name: productForm.value.name,
         description: productForm.value.description,
         category: productForm.value.category,
         image: productForm.value.image,
       };
-      this.productService.create(createProductDto).subscribe(
-        (createdProduct) =>
-          (this.product = {
-            id: this.product.id,
-            ...createdProduct,
-          })
-      );
+      this.productService
+        .create(createProductDto)
+        .pipe(untilDestroyed(this))
+        .subscribe(
+          (createdProduct) =>
+            (this.product = {
+              id: this.product.id,
+              ...createdProduct,
+            })
+        );
       alert('Product created successfully');
     } else if (this.behaviour === 'edit') {
       let editProductDto: ProductDto = {
@@ -94,6 +101,8 @@ export class ProductFormComponent implements OnInit, OnChanges {
       };
       this.productService
         .put(editProductDto)
+        .pipe(untilDestroyed(this))
+        .subscribe();
       alert('Product edited successfully');
     } else {
       throw Error('form behaviour not found');
