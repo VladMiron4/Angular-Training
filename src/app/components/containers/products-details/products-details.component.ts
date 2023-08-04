@@ -16,7 +16,7 @@ import { ProductService } from 'src/app/services/products.service';
   styleUrls: ['./products-details.component.scss'],
 })
 export class ProductsDetailsComponent implements OnInit {
-  product!: ProductDto;
+  product!: OrderProduct;
 
   constructor(
     private productService: ProductService,
@@ -40,7 +40,7 @@ export class ProductsDetailsComponent implements OnInit {
     this.productService
       .getProduct(id)
       .pipe(untilDestroyed(this))
-      .subscribe((product: ProductDto) => (this.product = product));
+      .subscribe((product: ProductDto) => (this.product = product as OrderProduct));
   }
 
   catchAddToShoppingCartEvent(product: OrderProduct) {

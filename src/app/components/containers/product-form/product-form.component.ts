@@ -21,7 +21,9 @@ export class ProductFormComponent implements OnInit, OnChanges {
 
   productForm!: FormGroup;
   product!: ProductDto;
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {
+    
+  }
 
   ngOnInit(): void {
     this.productForm = new FormGroup({
@@ -72,15 +74,14 @@ export class ProductFormComponent implements OnInit, OnChanges {
 
   catchProduct(productForm: FormGroup): void {
     if (this.behaviour === 'create') {
-      let createProductDto: CreateProduct = {
-        price: Number(this.productForm.value.price),
-        name: productForm.value.name,
-        description: productForm.value.description,
-        category: productForm.value.category,
-        image: productForm.value.image,
-      };
       this.productService
-        .create(createProductDto)
+        .create({
+          price: Number(this.productForm.value.price),
+          name: productForm.value.name,
+          description: productForm.value.description,
+          category: productForm.value.category,
+          image: productForm.value.image,
+        })
         .pipe(untilDestroyed(this))
         .subscribe(
           (createdProduct) =>

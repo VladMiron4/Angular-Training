@@ -12,20 +12,20 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   public create(productDto: CreateProduct): Observable<CreateProduct> {
-    return this.http.post(
+    return this.http.post <CreateProduct>(
       `${environment.apiUrl}/products`,
       productDto
-    ) as Observable<CreateProduct>;
+    ) ;
   }
   public put(productDto: ProductDto): Observable<CreateProduct> {
-    return this.http.put(
+    return this.http.put <ProductDto>(
       `${environment.apiUrl}/products/${productDto.id}`,
       productDto
-    ) as Observable<ProductDto>;
+    );
   }
   getProduct(id: String): Observable<ProductDto> {
-    return this.http.get(
+    return this.http.get <ProductDto> (
       `${environment.apiUrl}/products/${id}`
-    ) as Observable<ProductDto>;
+    ) 
   }
 }

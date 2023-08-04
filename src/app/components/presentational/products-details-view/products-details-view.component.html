@@ -11,10 +11,10 @@
         <img [src]="product.image" />
       </div>
       <div class="button-wrapper">
-        <button class="edit-button" (click)="emitAddToShoppingCart(product)">
+        <button class="edit-button" (click)="this.addToShoppingCart.emit(product);">
           Add
         </button>
-        <button class="delete-button" (click)="emitDeleteProduct(product.id)">
+        <button class="delete-button" (click)="this.deleteProduct.emit(product.id)">
           Delete
         </button>
         <button (click)="navigateToProductList.emit()">Go Back</button>

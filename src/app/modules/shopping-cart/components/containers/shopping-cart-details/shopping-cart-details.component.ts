@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, of } from 'rxjs';
-import { productsMockList } from 'src/app/components/mocks/products.mock';
 import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
 import { OrderProductWithId } from 'src/app/modules/shared/types/order.product';
 import { OrderProduct } from 'src/app/modules/shared/types/product.order';
@@ -29,12 +28,14 @@ export class ShoppingCartDetailsComponent {
   getProducts(): Observable<OrderProduct[]> {
     return of((this.productList = this.shoppingCartService.getShoppingCart()));
   }
+
   catchProductDelete(productId: string) {
     this.productList = this.shoppingCartService.removeFromShoppingCart(
       this.productList,
       productId
     );
   }
+
   catchCheckoutOrder(productList: OrderProduct[]) {
     let dummyCustomer = 'bacb89d7-9070-426f-a662-facb538c8da9';
     let orderList: OrderProductWithId[] = [];
