@@ -1,3 +1,5 @@
 <app-shopping-cart-details-view
   [productList]="productList"
+  (removeProductEvent)="catchProductDelete($event)"
+  (checkoutOrderEvent)="catchCheckoutOrder($event)"
 ></app-shopping-cart-details-view>

@@ -1,0 +1,21 @@
+<form class="form-wrapper" [formGroup]="productForm">
+  <input formControlName="name"/>
+  <input formControlName="category" />
+  <input formControlName="description" />
+  <input formControlName="price" />
+  <input formControlName="image" />
+  <div class="form-button-wrapper">
+    <button
+      class="save-button"
+      type="button"
+      [disabled]="!productForm.valid"
+      (click)="this.submit.emit(productForm);"
+    >
+      Save
+    </button>
+    <button class="cancel-button" type="button" (click)="this.productForm.reset();">
+      Cancel
+    </button>
+  </div>
+  
+</form>

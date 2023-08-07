@@ -1,6 +1,7 @@
 <div class="shopping-cart-menu">
   <h2>Shopping Cart</h2>
-  <button>Checkout</button>
+  <button (click)="this.checkoutOrderEvent.emit(productList)">Checkout</button>
+  <button routerLink="../app-products-lists">Go Back</button>
 </div>
 <div class="shopping-cart-titles">
   <h1>Category</h1>
@@ -22,6 +23,14 @@
     <p>{{ product.quantity }}</p>
   </div>
   <div class="detail">
-    <app-icon-button [imageUrl]="checkProductImageUrl"></app-icon-button>
+    <a routerLink="../app-products-details/{{ product.id }}">
+      <app-icon-button [imageUrl]="checkProductImageUrl"></app-icon-button
+    ></a>
+  </div>
+  <div class="detail">
+    <app-icon-button
+      [imageUrl]="deleteButtonImageUrl"
+      (click)="this.removeProductEvent.emit(product.id)"
+    ></app-icon-button>
   </div>
 </div>

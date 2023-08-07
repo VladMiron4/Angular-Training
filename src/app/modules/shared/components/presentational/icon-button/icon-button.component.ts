@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   standalone: true,
 })
 export class IconButtonComponent {
-  @Input() imageUrl!:String;
+  @Input() imageUrl!: string;
 }

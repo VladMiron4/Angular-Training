@@ -1,0 +1,29 @@
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 100vh;
+  border-style: solid;
+  border-radius: 3%;
+  input {
+    overflow: auto;
+  }
+}
+.form-button-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.save-button,
+.cancel-button {
+  width: 50vh;
+  border-color: white;
+  cursor: pointer;
+  border-style: solid;
+}
+.save-button {
+  color: black;
+  background-color: greenyellow;
+}
+.cancel-button {
+  color: black;
+  background-color: crimson;
+}

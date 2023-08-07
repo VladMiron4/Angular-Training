@@ -1,1 +1,7 @@
-<app-products-details-view [product]="product" />
+<app-products-details-view
+  (navigateToProductList)="onNavigateToProductList()"
+  [product]="product"
+  (addToShoppingCart)="catchAddToShoppingCartEvent($event)"
+  (deleteProduct)="catchDeleteProductEvent()"
+  (navigateToProductEdit)="onNavigateToProductEdit($event)"
+/>

@@ -1,25 +1,66 @@
-import { Component, OnInit } from '@angular/core';
-import { productsMockList } from '../../mocks/products.mock';
-import { Product } from '../../../modules/shared/types/product';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnInit, Output } from '@angular/core';
+import { OrderProduct } from '../../../modules/shared/types/product.order';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
+import { HttpClient } from '@angular/common/http';
+import { Product } from 'src/app/modules/shared/types/product.dto';
+import { environment } from 'src/environments/environment';
+import { AppNavigationService } from 'src/app/modules/shared/services/app-navigation.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ProductService } from 'src/app/services/products.service';
+import { catchError, tap, throwError } from 'rxjs';
+
+@UntilDestroy()
 @Component({
   selector: 'app-products-details',
   templateUrl: './products-details.component.html',
   styleUrls: ['./products-details.component.scss'],
 })
 export class ProductsDetailsComponent implements OnInit {
-  product: Product = productsMockList[0];
+  product!: OrderProduct;
 
-  constructor(private route: ActivatedRoute) {}
-  getProduct(id: String): Observable<Product> {
-    const product = productsMockList.find((product) => product.id === id)!;
-    return of(product);
-  }
-
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private shoppingCartService: ShoppingCartService,
+    private http: HttpClient,
+    private appNavigationService: AppNavigationService
+  ) {}
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
-    this.getProduct(id).subscribe((product) => (this.product = product));
+    this.productService
+      .getProduct(id)
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        (product: Product) => (this.product = product as OrderProduct)
+      );
+  }
+
+  onNavigateToProductList() {
+    this.appNavigationService.navigateToProductsList();
+  }
+
+  onNavigateToProductEdit(id: string) {
+    this.appNavigationService.navigateToProductEdit(id);
+  }
+
+  catchAddToShoppingCartEvent(product: OrderProduct) {
+    this.shoppingCartService.addToShoppingCart(product);
+  }
+
+  catchDeleteProductEvent() {
+    this.http
+      .delete(`${environment.apiUrl}/products/${this.product.id}`)
+      .pipe(
+        untilDestroyed(this),
+        tap(() => {
+          alert('Product Edited successfully');
+        }),
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      )
+      .subscribe();
+    this.appNavigationService.navigateToProductsList();
   }
 }
