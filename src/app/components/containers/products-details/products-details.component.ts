@@ -54,7 +54,7 @@ export class ProductsDetailsComponent implements OnInit {
       .pipe(
         untilDestroyed(this),
         tap(() => {
-          'Product Edited successfully';
+          alert('Product Edited successfully');
         }),
         catchError((error) => {
           return throwError(() => error);
