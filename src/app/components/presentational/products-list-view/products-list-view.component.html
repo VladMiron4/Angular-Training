@@ -1,5 +1,6 @@
 <button (click)="navigateToCart.emit()">Shopping Cart</button>
 <button (click)="navigateToCreate.emit()">Add</button>
+<button (click)="navigateToLogin.emit()">Login</button>
 <div class="view-container">
   <div *ngFor="let product of productList" class="product-container">
     <a (click)="navigateToDetails.emit(product.id)">

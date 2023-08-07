@@ -11,4 +11,5 @@ export class ProductsListViewComponent {
   @Output() navigateToCart = new EventEmitter<void>();
   @Output() navigateToCreate = new EventEmitter<void>();
   @Output() navigateToDetails = new EventEmitter<string>();
+  @Output() navigateToLogin=new EventEmitter<void>();
 }

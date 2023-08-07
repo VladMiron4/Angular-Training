@@ -31,4 +31,16 @@ export class AppNavigationService {
       AppRoutes.CREATE_SUB_FEATURE,
     ]);
   }
+  navigateToLogin(){
+    this.router.navigate([
+      AppRoutes.AUTH_FEATURE,
+      AppRoutes.LOGIN_SUB_FEATURE
+    ])
+  }
+  navigateToRegister(){
+    this.router.navigate([
+      AppRoutes.AUTH_FEATURE,
+      AppRoutes.REGISTER_SUB_FEATURE
+    ])
+  }
 }

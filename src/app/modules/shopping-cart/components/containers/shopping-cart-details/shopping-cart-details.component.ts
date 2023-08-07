@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, of } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { ShoppingCartService } from 'src/app/modules/shared/services/shopping.cart.service';
 import { OrderProductWithId } from 'src/app/modules/shared/types/order.product';
 import { OrderProduct } from 'src/app/modules/shared/types/product.order';
@@ -15,10 +15,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./shopping-cart-details.component.scss'],
 })
 export class ShoppingCartDetailsComponent {
-  private shoppingCartService: ShoppingCartService;
   productList: OrderProduct[];
   constructor(
-    shoppingCartService: ShoppingCartService,
+    private shoppingCartService: ShoppingCartService,
     private http: HttpClient
   ) {
     this.shoppingCartService = shoppingCartService;
@@ -51,8 +50,15 @@ export class ShoppingCartDetailsComponent {
     };
     this.http
       .post(`${environment.apiUrl}/orders`, order)
-      .pipe(untilDestroyed(this))
+      .pipe(
+        untilDestroyed(this),
+        tap(() => {
+          alert('Order created successfully');
+        }),
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      )
       .subscribe();
-    alert('order created successfully');
   }
 }

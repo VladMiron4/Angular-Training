@@ -6,8 +6,13 @@ import { ProductsListsComponent } from './components/containers/products-lists/p
 import { ProductsCreatePageComponent } from './components/pages/products-create-page.component';
 import { AppRoutes } from './modules/shared/types/app.routing.types';
 import { ProductsEditPageComponent } from './components/pages/products-edit-page.component';
+import { LoginFormComponent } from './components/containers/login-form/login-form.component';
 
 const routes: Routes = [
+  {
+    path:`${AppRoutes.AUTH_FEATURE}/${AppRoutes.LOGIN_SUB_FEATURE}`,
+    component:LoginFormComponent,
+  },
   {
     path: `${AppRoutes.PRODUCTS_FEATURE}/${AppRoutes.CREATE_SUB_FEATURE}`,
     component: ProductsCreatePageComponent,

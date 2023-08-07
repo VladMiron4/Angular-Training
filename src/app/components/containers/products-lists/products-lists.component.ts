@@ -15,7 +15,7 @@ export class ProductsListsComponent implements OnInit {
   productList!: Product[];
   constructor(
     private http: HttpClient,
-    private appNavigationService: AppNavigationService
+    private appNavigationService: AppNavigationService,
   ) {}
   ngOnInit(): void {
     this.productList=[];
@@ -32,6 +32,9 @@ export class ProductsListsComponent implements OnInit {
   }
   onNavigateToDetails(id: string) {
     this.appNavigationService.navigateToProductDetails(id);
+  }
+  onNavigateToLogin(){
+    this.appNavigationService.navigateToLogin();
   }
   
 }

@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AppNavigationService } from 'src/app/modules/shared/services/app-navigation.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProductService } from 'src/app/services/products.service';
+import { catchError, tap, throwError } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -24,15 +25,15 @@ export class ProductsDetailsComponent implements OnInit {
     private shoppingCartService: ShoppingCartService,
     private http: HttpClient,
     private appNavigationService: AppNavigationService
-  ) {
-    
-  }
+  ) {}
   ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.productService
       .getProduct(id)
       .pipe(untilDestroyed(this))
-      .subscribe((product: Product) => (this.product = product as OrderProduct));
+      .subscribe(
+        (product: Product) => (this.product = product as OrderProduct)
+      );
   }
 
   onNavigateToProductList() {
@@ -42,16 +43,23 @@ export class ProductsDetailsComponent implements OnInit {
   onNavigateToProductEdit(id: string) {
     this.appNavigationService.navigateToProductEdit(id);
   }
-  
 
   catchAddToShoppingCartEvent(product: OrderProduct) {
     this.shoppingCartService.addToShoppingCart(product);
   }
 
-  catchDeleteProductEvent(id: String) {
+  catchDeleteProductEvent() {
     this.http
-      .delete(`${environment.apiUrl}/products/${id}`)
-      .pipe(untilDestroyed(this))
+      .delete(`${environment.apiUrl}/products/${this.product.id}`)
+      .pipe(
+        untilDestroyed(this),
+        tap(() => {
+          'Product Edited successfully';
+        }),
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      )
       .subscribe();
     this.appNavigationService.navigateToProductsList();
   }

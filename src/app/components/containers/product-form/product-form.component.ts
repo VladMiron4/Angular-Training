@@ -20,26 +20,9 @@ export class ProductFormComponent implements OnInit, OnChanges {
 
   productForm!: FormGroup;
   product!: Product;
-  constructor(private productService: ProductService) {
-    
-  }
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productForm = new FormGroup({
-      name: new FormControl(''),
-      category: new FormControl(''),
-      price: new FormControl(''),
-      image: new FormControl(''),
-      description: new FormControl(''),
-    });
-    this.product = {
-      category: '',
-      name: '',
-      price: 0,
-      image: '',
-      id: '',
-      description: '',
-    };
     if (this.behaviour === 'edit') {
       this.product = this.prevProduct!;
     } else if (this.behaviour === 'create') {
@@ -55,19 +38,29 @@ export class ProductFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.productForm = new FormGroup({
+      name: new FormControl(''),
+      category: new FormControl(''),
+      price: new FormControl(''),
+      image: new FormControl(''),
+      description: new FormControl(''),
+    });
     if (
       changes['prevProduct']?.previousValue !==
         changes['prevProduct']?.currentValue &&
       this.behaviour === 'edit'
     ) {
       this.prevProduct = changes['prevProduct'].currentValue;
-      this.productForm.patchValue({
-        name: this.prevProduct?.name,
-        category: this.prevProduct?.category,
-        description: this.prevProduct?.description,
-        image: this.prevProduct?.image,
-        price: String(this.prevProduct?.price),
-      });
+      if (this.productForm != null) {
+        this.productForm.patchValue({
+          name: this.prevProduct?.name,
+          category: this.prevProduct?.category,
+          description: this.prevProduct?.description,
+          image: this.prevProduct?.image,
+          price: String(this.prevProduct?.price),
+        });
+      }
+      console.log(this.productForm.value);
     }
   }
 
@@ -75,10 +68,10 @@ export class ProductFormComponent implements OnInit, OnChanges {
     if (this.behaviour === 'create') {
       this.productService
         .create({
-          price: Number(this.productForm.value.price),
           name: productForm.value.name,
-          description: productForm.value.description,
           category: productForm.value.category,
+          price: Number(productForm.value.price),
+          description: productForm.value.description,
           image: productForm.value.image,
         })
         .pipe(untilDestroyed(this))
@@ -103,7 +96,6 @@ export class ProductFormComponent implements OnInit, OnChanges {
         .put(editProductDto)
         .pipe(untilDestroyed(this))
         .subscribe();
-      alert('Product edited successfully');
     } else {
       throw Error('form behaviour not found');
     }
